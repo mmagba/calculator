@@ -36,6 +36,7 @@ body{
     font-size: 4.5rem;
     border: black solid 5px;
     background-color: white;
+    padding-left: 7px;
 }
 button{
     height: 75px;
@@ -43,6 +44,7 @@ button{
     font-size: 2rem;
     margin: 2px;
     border-radius: 10px;
+    cursor: pointer;
 }
 #clear{
     font-size: 1.5rem;

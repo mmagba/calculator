@@ -32,14 +32,19 @@ function operate(operator, num1, num2) {
             break;
     }
 }
-let num1 = undefined, num2 = undefined, currentOperator = 'none';
+let num1 = undefined, num2 = undefined, currentOperator = 'none', newNum = true;
 
 const display = document.querySelector('#display');
 const numButton = document.querySelectorAll('.numButton');
 numButton.forEach((num) => {
     num.addEventListener('click', () => {
+        if (newNum === true) {
+            display.textContent = '0';
+            newNum = false;
+        }
         display.textContent += num.textContent;
         display.textContent = Number(display.textContent);
+        display.textContent=display.textContent.substring(0,8);
 
     });
 
@@ -53,13 +58,17 @@ operators.forEach((operator) => {
         if (currentOperator === 'none') {
             num1 = display.textContent;
             currentOperator = operator.textContent;
-            display.textContent = '0';
+            //display.textContent = '0';
+            newNum = true;
         }
         else {
             num2 = display.textContent;
             num1 = operate(currentOperator, num1, num2);
             currentOperator = operator.textContent;
-            display.textContent = '0';
+            //display.textContent = '0';
+            display.textContent = num1;
+            display.textContent=display.textContent.substring(0,8);
+            newNum = true;
         }
     });
 })
@@ -68,6 +77,7 @@ const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
     num2 = display.textContent;
     display.textContent = operate(currentOperator, num1, num2);
+    display.textContent=display.textContent.substring(0,8);
     num1 = display.textContent;
     currentOperator = 'none';
 
@@ -82,5 +92,6 @@ clear.addEventListener('click', () => {
     display.textContent = '0';
     num1 = undefined;
     num2 = undefined;
+    newNum = true;
 
 });
